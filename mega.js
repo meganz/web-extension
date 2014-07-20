@@ -4,7 +4,9 @@ chrome.webRequest.onBeforeRequest.addListener(
 		if ((details.url.substr(-4) == '.xml') || (details.url.substr(-4) == '.crx') || (details.url.substr(-4) == '.xpi') || (details.url.substr(-4) == '.exe') || (details.url.substr(-4) == '.dmg') || (details.url.substr(-3) == '.gz') || (details.url.substr(-4) == '.zip') || (details.url.substr(-3) == '.js')) return { cancel:  false };	
 		else
 		{
-			return { redirectUrl:  chrome.extension.getURL("mega/secure.html") };	
+			var hash = '';
+			if (details.url.indexOf('#') > -1) hash = '#' + details.url.split('#')[1];			
+			return { redirectUrl:  chrome.extension.getURL("mega/secure.html" + hash) };
 		}
     },
     {
