@@ -3,7 +3,7 @@
   "name": "MEGA",
   "description": "Secure Cloud Storage",
   "version": "1.0.167",
-  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.mega.co.nz/ https://*.mega.is/ https://*.mega.nz/; object-src 'self' 'unsafe-eval' https://*.mega.co.nz/ https://*.mega.is/;",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.mega.co.nz/ https://*.mega.is/ https://*.mega.nz/; object-src 'self' 'unsafe-eval' https://*.mega.co.nz/ https://*.mega.io/ https://*.mega.is/;",
   "nacl_modules": [{
     "path": "mega",
     "mime_type": "text/html"
@@ -14,9 +14,11 @@
 	"https://mega.is/",
 	"https://mega.co.nz/",
 	"https://mega.nz/",
+	"https://mega.io/",	
 	"http://mega.co.nz/",
 	"http://mega.is/",
 	"http://mega.nz/",
+	"http://mega.io/",
     "webRequestBlocking",
 	"unlimitedStorage",
 	"clipboardWrite"
