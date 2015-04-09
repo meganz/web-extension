@@ -11,17 +11,18 @@
   "permissions": 
   [
     "webRequest",
-	"https://mega.is/",
-	"https://mega.co.nz/",
-	"https://mega.nz/",
-	"https://mega.io/",	
-	"http://mega.co.nz/",
-	"http://mega.is/",
-	"http://mega.nz/",
-	"http://mega.io/",
     "webRequestBlocking",
-	"unlimitedStorage",
-	"clipboardWrite"
+    "https://mega.is/",
+    "https://mega.co.nz/",
+    "https://mega.nz/",
+    "https://mega.io/",	
+    "http://mega.co.nz/",
+    "http://mega.is/",
+    "http://mega.nz/",
+    "http://mega.io/",
+    "*://*.mega.co.nz",
+    "unlimitedStorage",
+    "clipboardWrite"
   ],
   "web_accessible_resources": [
     "mega/secure.html"
@@ -29,9 +30,9 @@
   "homepage_url": "https://mega.co.nz/",
   "background": {"scripts":["mega.js"]},
   "icons": 
-  { 
-		"16": "images/icon_16.png",
-        "48": "images/icon_48.png",
-        "128": "images/icon_128.png" 
-   }
+  {
+    "16": "images/icon_16.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  }
 }
