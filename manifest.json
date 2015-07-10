@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "MEGA",
   "description": "Secure Cloud Storage",
-  "version": "1.0.238",
+  "version": "1.0.0",
   "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.mega.co.nz/ https://*.mega.is/ https://*.mega.nz/; object-src 'self' 'unsafe-eval' https://*.mega.co.nz/ https://*.mega.is/;",
   "nacl_modules": [{
     "path": "mega",
