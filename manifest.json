@@ -27,7 +27,7 @@
   "web_accessible_resources": [
     "mega/secure.html"
   ],
-  "homepage_url": "https://mega.co.nz/",
+  "homepage_url": "https://mega.nz/",
   "background": {"scripts":["mega.js"]},
   "icons": 
   {
