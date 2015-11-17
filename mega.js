@@ -7,8 +7,8 @@ chrome.webRequest.onBeforeRequest.addListener(
             || (details.url.substr(-4) == '.exe')
             || (details.url.substr(-4) == '.dmg')
             || (details.url.substr(-3) == '.gz')
-            || (details.url.substr(-3) == '.deb')
-            || (details.url.substr(-3) == '.rpm')
+            || (details.url.substr(-4) == '.deb')
+            || (details.url.substr(-4) == '.rpm')
             || (details.url.substr(-4) == '.zip')
             || (details.url.substr(-3) == '.js')) {
 
