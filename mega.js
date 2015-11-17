@@ -1,7 +1,10 @@
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) 
 	{
-		if ((details.url.substr(-4) == '.xml') || (details.url.substr(-4) == '.crx') || (details.url.substr(-4) == '.xpi') || (details.url.substr(-4) == '.exe') || (details.url.substr(-4) == '.dmg') || (details.url.substr(-3) == '.gz') || (details.url.substr(-4) == '.zip') || (details.url.substr(-3) == '.js')) return { cancel:  false };	
+		if ((details.url.substr(-4) == '.xml')
+			|| (details.url.substr(-4) == '.crx')
+			|| (details.url.substr(-4) == '.xpi')
+			|| (details.url.substr(-4) == '.exe') || (details.url.substr(-4) == '.dmg') || (details.url.substr(-3) == '.gz') || (details.url.substr(-4) == '.zip') || (details.url.substr(-3) == '.js')) return { cancel:  false };	
 		else
 		{
 			var hash = '';
