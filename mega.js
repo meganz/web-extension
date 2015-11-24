@@ -10,6 +10,7 @@ chrome.webRequest.onBeforeRequest.addListener(
             || (details.url.substr(-4) == '.deb')
             || (details.url.substr(-4) == '.rpm')
             || (details.url.substr(-4) == '.zip')
+            || (details.url.substr(-4) == '.txt')
             || (details.url.substr(-3) == '.js')) {
 
                 return { cancel:  false };
