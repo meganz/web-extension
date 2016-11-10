@@ -20,7 +20,7 @@
     "http://mega.is/",
     "http://mega.nz/",
     "http://mega.io/",
-    "*://*.mega.co.nz",
+    "https://*.mega.co.nz",
     "unlimitedStorage",
     "clipboardWrite"
   ],
