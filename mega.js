@@ -17,9 +17,10 @@ chrome.webRequest.onBeforeRequest.addListener(
                 return { cancel:  false };
         }
         else
-        {
+        {			
             var hash = '';
             if (details.url.indexOf('#') > -1) hash = '#' + details.url.split('#')[1];
+			else if (details.url.indexOf('https://mega.nz/') > -1 && details.url.length > 16) hash = '#' + details.url.split('https://mega.nz/')[1];
             return { redirectUrl:  chrome.extension.getURL("mega/secure.html" + hash) };
         }
     },
