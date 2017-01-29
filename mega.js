@@ -12,7 +12,8 @@ chrome.webRequest.onBeforeRequest.addListener(
             || (details.url.substr(-4) == '.zip')
             || (details.url.substr(-4) == '.txt')
             || (details.url.substr(-4) == '.pdf')
-            || (details.url.substr(-3) == '.js')) {
+            || (details.url.substr(-3) == '.js')
+			|| (details.url.indexOf('mega.nz/linux') > -1)) {
 
                 return { cancel:  false };
         }
