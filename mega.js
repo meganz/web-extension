@@ -25,7 +25,7 @@ chrome.webRequest.onBeforeRequest.addListener(
                 var path = url.split('.nz/')[1];
 
                 if (url.indexOf('#') > -1) {
-                    var nlfe = url.match(/\/\/mega\.nz\/(file|folder|embed|drop)[!#/]+([\w-]{8,11})(?:[#!](.*))?/);
+                    var nlfe = url.match(/\/\/mega\.nz\/(embed|drop)[!#/]+([\w-]{8,11})(?:[#!](.*))?/);
 
                     if (nlfe) {
                         var type = nlfe[1];
@@ -40,6 +40,12 @@ chrome.webRequest.onBeforeRequest.addListener(
                     }
                     else if (url.indexOf('://mega.nz/chat/') > -1) {
                         hash = '#' + path;
+                    }
+                    else if (url.indexOf('/folder/') > -1) {
+                        hash = '#/' + path;
+                    }
+                    else if (url.indexOf('/file/') > -1) {
+                        hash = '#/' + path;
                     }
                     else {
                         hash = '#' + url.split('#')[1];
