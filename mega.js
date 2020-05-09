@@ -1,93 +1,132 @@
-chrome.webRequest.onBeforeRequest.addListener(
-    function(details)
-    {
-        if ((details.url.substr(-4) == '.xml')
-            || (details.url.substr(-4) == '.crx')
-            || (details.url.substr(-4) == '.xpi')
-            || (details.url.substr(-4) == '.exe')
-            || (details.url.substr(-4) == '.dmg')
-            || (details.url.substr(-3) == '.gz')
-            || (details.url.substr(-4) == '.deb')
-            || (details.url.substr(-4) == '.rpm')
-            || (details.url.substr(-4) == '.zip')
-            || (details.url.substr(-4) == '.txt')
-            || (details.url.substr(-4) == '.pdf')
-            || (details.url.substr(-3) == '.js')
-            || (details.url.indexOf('mega.nz/linux') > -1)) {
+(function(chrome) {
+    'use strict';
 
-                return { cancel:  false };
+    const manifest = chrome.runtime.getManifest();
+    const production = manifest.version !== '109101.103.97';
+    const baseURL = chrome.extension.getURL(production ? 'mega/secure.html' : 'webclient/index.html');
+
+    const extPassTh = {
+        '.xml': 1,
+        '.crx': 1,
+        '.xpi': 1,
+        '.exe': 1,
+        '.dmg': 1,
+        '.deb': 1,
+        '.rpm': 1,
+        '.zip': 1,
+        '.txt': 1,
+        '.pdf': 1,
+        '.js': 1,
+        '.gz': 1
+    };
+
+    const getPathHash = (aUrl, aDefValue) => {
+        try {
+            const uri = new URL(aUrl);
+            return uri.pathname + uri.hash;
         }
-        else
-        {
-            var hash = '';
-            if (details.url.indexOf('://mega.nz/') > 0) {
-                var url = details.url;
-                var path = url.split('.nz/')[1];
+        catch (ex) {}
 
-                if (url.indexOf('#') > -1) {
-                    var nlfe = url.match(/\/\/mega\.nz\/(embed|drop)[!#/]+([\w-]{8,11})(?:[#!](.*))?/);
+        return aDefValue;
+    };
 
-                    if (nlfe) {
-                        var type = nlfe[1];
-                        var node = nlfe[2];
-                        var pkey = nlfe[3];
-                        var lpfx = ({embed: 'E', folder: 'F', drop: 'D'})[type] || '';
+    const onBeforeRequest = (aRequest) => {
+        const url = aRequest.url;
+        const ext3 = url.substr(-3);
+        const ext4 = url.substr(-4);
 
-                        if (pkey && type === 'folder') {
-                            pkey = pkey.replace('/folder/', '!').replace('/file/', '?');
-                        }
-                        hash = '#' + lpfx + '!' + node + (pkey ? '!' + pkey : '');
+        if (extPassTh[ext3] || extPassTh[ext4] || url.indexOf('mega.nz/linux') > 0) {
+            return {cancel: false};
+        }
+
+        let hash = '';
+        const domain = (url.match(/:\/\/[^/]+\//) || [''])[0];
+
+        if (domain.replace(/www\.|co\./g, '') === '://mega.nz/') {
+            const path = url.split(domain)[1];
+
+            if (/^\/*(?:chat|file|folder)\//.test(path)) {
+                hash = '#' + getPathHash(url, path);
+            }
+            else if (url.indexOf('#') > -1) {
+                const nlfe = url.match(/\/\/mega\.nz\/+(file|folder|embed|drop)[!#/]+([\w-]{8,11})(?:[#!](.*))?/i);
+
+                if (nlfe) {
+                    let type = nlfe[1];
+                    let node = nlfe[2];
+                    let pkey = nlfe[3];
+                    let lpfx = ({embed: 'E', folder: 'F', drop: 'D'})[type] || '';
+
+                    if (pkey && type === 'folder') {
+                        pkey = pkey.replace('/folder/', '!').replace('/file/', '?');
                     }
-                    else if (url.indexOf('://mega.nz/chat/') > -1) {
-                        hash = '#' + path;
-                    }
-                    else if (url.indexOf('/folder/') > -1) {
-                        hash = '#/' + path;
-                    }
-                    else if (url.indexOf('/file/') > -1) {
-                        hash = '#/' + path;
-                    }
-                    else {
-                        hash = '#' + url.split('#')[1];
-                    }
+                    hash = '#' + lpfx + '!' + node + (pkey ? '!' + pkey : '');
                 }
-                else if (path) {
-                    hash = '#' + path;
+                else {
+                    hash = '#' + url.split('#')[1];
                 }
             }
-            return { redirectUrl:  chrome.extension.getURL("mega/secure.html" + hash) };
+            else if (path) {
+                hash = '#' + path;
+            }
         }
-    },
-    {
-        urls: [
-            "http://mega.co.nz/*",
-            "https://mega.co.nz/*",
-            "http://www.mega.co.nz/*",
-            "https://www.mega.co.nz/*",
-            "http://mega.nz/*",
-            "https://mega.nz/*",
-            "http://www.mega.nz/*",
-            "https://www.mega.nz/*",
-            "http://mega.is/*",
-            "https://mega.is/*",
-            "http://www.mega.is/*",
-            "https://www.mega.is/*"
-        ],
-        types: ["main_frame","sub_frame"]
-    },
-    ["blocking"]
-);
+        return {redirectUrl: baseURL + hash};
+    };
 
-chrome.webRequest.onHeadersReceived.addListener(
-  function(details)
-    {
-        // console.log('responseHeaders',responseHeaders);
-    },
-    {
-        urls: [
-            chrome.extension.getURL("mega")
-        ],
-        types: ["main_frame","sub_frame"]
-    },
-    ["blocking"]
-);
+    chrome.webRequest.onBeforeRequest.addListener(onBeforeRequest,
+        {
+            urls: [
+                "http://mega.co.nz/*",
+                "https://mega.co.nz/*",
+                "http://www.mega.co.nz/*",
+                "https://www.mega.co.nz/*",
+                "http://mega.nz/*",
+                "https://mega.nz/*",
+                "http://www.mega.nz/*",
+                "https://www.mega.nz/*"
+            ],
+            types: ["main_frame", "sub_frame"]
+        },
+        ["blocking"]
+    );
+
+    if (!production) {
+        const extURL = chrome.runtime.getURL('/');
+
+        chrome.webRequest.onBeforeRequest.addListener(
+            (aRequest) => {
+                let target = false;
+                let path = aRequest.url.replace(extURL, '');
+
+                if (path === 'secureboot.js') {
+                    target = extURL + 'webclient/secureboot.js';
+                }
+                else if (path === 'mega/secure.html') {
+                    target = baseURL;
+                }
+                else if (path.substr(0, 5) === 'mega/') {
+                    if (path.substr(0, 10) === 'mega/lang/') {
+                        path = path.replace('.json', '_prod.json');
+                    }
+                    target = extURL + path.replace('mega/', 'webclient/');
+                }
+
+                // console.log('redirectUrl', aRequest.url, target);
+                return target ? {redirectUrl: target} : {cancel: false};
+            },
+            {
+                urls: [chrome.extension.getURL('/*')],
+                types: ['main_frame', 'sub_frame', 'image', 'script', 'xmlhttprequest', 'other']
+            },
+            ["blocking"]
+        );
+    }
+
+    chrome.browserAction.onClicked.addListener(() => {
+        chrome.tabs.create({url: manifest.homepage_url + (production ? '' : '#debug')})
+    });
+    chrome.browserAction.setTitle({
+        title: '' + manifest.name + ' v' + manifest.version + (production ? '' : ' (development)')
+    });
+
+})(self.browser || self.chrome);

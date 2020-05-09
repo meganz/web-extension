@@ -1,37 +1,57 @@
 {
   "manifest_version": 2,
   "name": "MEGA",
-  "description": "Secure Cloud Storage",
-  "version": "1.0.0",
-  "content_security_policy": "script-src 'self' https://*.mega.co.nz https://*.mega.nz blob:; object-src 'self' https://*.mega.co.nz https://*.mega.nz;",
+  "description": "Secure Cloud Storage and Chat",
+  "version": "109101.103.97",
+  "content_security_policy": "script-src 'self' https://*.mega.co.nz https://*.mega.nz blob:; object-src 'self' https://*.mega.co.nz https://*.mega.nz blob:;",
   "nacl_modules": [{
     "path": "mega",
     "mime_type": "text/html"
   }],
-  "permissions": 
+  "permissions":
   [
     "webRequest",
     "webRequestBlocking",
-    "https://mega.is/",
     "https://mega.co.nz/",
     "https://mega.nz/",
-    "https://mega.io/",	
     "http://mega.co.nz/",
-    "http://mega.is/",
     "http://mega.nz/",
-    "http://mega.io/",
     "unlimitedStorage",
     "clipboardWrite"
   ],
   "web_accessible_resources": [
-    "mega/secure.html"
+    "mega/secure.html",
+    "webclient/index.html"
   ],
   "homepage_url": "https://mega.nz/",
-  "background": {"scripts":["mega.js"]},
-  "icons": 
-  {
-    "16": "images/icon_16.png",
-    "48": "images/icon_48.png",
-    "128": "images/icon_128.png"
+  "background": {
+    "scripts": [
+      "mega.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "images/icon-16.png",
+    "19": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "38": "images/icon-32.png",
+    "64": "images/icon-64.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "19": "images/icon-16.png",
+      "32": "images/icon-32.png",
+      "38": "images/icon-32.png",
+      "64": "images/icon-64.png"
+    },
+    "default_title": "MEGA"
+  },
+  "applications": {
+    "gecko": {
+      "id": "firefox@mega.co.nz",
+      "strict_min_version": "52.0",
+      "update_url": "https://mega.nz/firefox-web-extension-updates.json"
+    }
   }
 }
