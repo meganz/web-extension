@@ -49,17 +49,14 @@
                 hash = '#' + getPathHash(url, path);
             }
             else if (url.indexOf('#') > -1) {
-                const nlfe = url.match(/\/\/mega\.nz\/+(file|folder|embed|drop)[!#/]+([\w-]{8,11})(?:[#!](.*))?/i);
+                const nlfe = url.match(/\/\/mega\.nz\/+(embed|drop)[!#/]+([\w-]{8,11})(?:[#!](.*))?/i);
 
                 if (nlfe) {
                     let type = nlfe[1];
                     let node = nlfe[2];
                     let pkey = nlfe[3];
-                    let lpfx = ({embed: 'E', folder: 'F', drop: 'D'})[type] || '';
+                    let lpfx = ({embed: 'E', drop: 'D'})[type] || '';
 
-                    if (pkey && type === 'folder') {
-                        pkey = pkey.replace('/folder/', '!').replace('/file/', '?');
-                    }
                     hash = '#' + lpfx + '!' + node + (pkey ? '!' + pkey : '');
                 }
                 else {
@@ -123,7 +120,7 @@
     }
 
     chrome.browserAction.onClicked.addListener(() => {
-        chrome.tabs.create({url: manifest.homepage_url + (production ? '' : '#debug')})
+        chrome.tabs.create({url: manifest.homepage_url + (production ? '' : '#debug')});
     });
     chrome.browserAction.setTitle({
         title: '' + manifest.name + ' v' + manifest.version + (production ? '' : ' (development)')
