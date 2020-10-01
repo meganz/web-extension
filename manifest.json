@@ -14,8 +14,10 @@
     "webRequestBlocking",
     "https://mega.co.nz/",
     "https://mega.nz/",
+    "https://mega.io/",
     "http://mega.co.nz/",
     "http://mega.nz/",
+    "http://mega.io/",
     "unlimitedStorage",
     "clipboardWrite"
   ],

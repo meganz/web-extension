@@ -41,11 +41,12 @@
 
         let hash = '';
         const domain = (url.match(/:\/\/[^/]+\//) || [''])[0];
+        const cleanDomain = domain.replace(/www\.|co\./g, '');
 
-        if (domain.replace(/www\.|co\./g, '') === '://mega.nz/') {
+        if (cleanDomain === '://mega.nz/' || cleanDomain === '://mega.io/') {
             const path = url.split(domain)[1];
 
-            if (/^\/*(?:chat|file|folder)\//.test(path)) {
+            if (/^\/*(?:chat|file|folder|help)\//.test(path)) {
                 hash = '#' + getPathHash(url, path);
             }
             else if (url.indexOf('#') > -1) {
