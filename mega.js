@@ -20,14 +20,16 @@
         '.gz': 1
     };
 
+    const qsMap = v => String(v || '').replace(/[&?]/g, '/');
+
     const getPathHash = (aUrl, aDefValue) => {
         try {
             const uri = new URL(aUrl);
-            return uri.pathname + uri.hash;
+            return uri.pathname.substr(1) + qsMap(uri.search) + uri.hash;
         }
         catch (ex) {}
 
-        return aDefValue;
+        return qsMap(aDefValue);
     };
 
     const onBeforeRequest = (aRequest) => {
@@ -65,7 +67,7 @@
                 }
             }
             else if (path) {
-                hash = '#' + path;
+                hash = '#' + (path.indexOf('?') !== -1 ? getPathHash(url, path) : path);
             }
         }
         return {redirectUrl: baseURL + hash};
