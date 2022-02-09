@@ -4,6 +4,7 @@
   "description": "Secure Cloud Storage and Chat",
   "version": "109101.103.97",
   "content_security_policy": "script-src 'self' https://*.mega.co.nz https://*.mega.nz blob:; object-src 'self' https://*.mega.co.nz https://*.mega.nz blob:;",
+  "incognito": "split",
   "nacl_modules": [{
     "path": "mega",
     "mime_type": "text/html"
