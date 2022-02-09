@@ -1,6 +1,6 @@
 ## mega.nz browser extension ##
 
-This is the repository for our browser extensions, using the WebExtension API for the different browsers <sup>(Chrome, Firefox, ...)</sup>
+This is the repository for our browser extensions, using the WebExtension API for the different browsers <sup>(Chrome, Opera, ...)</sup>
 
 Thanks to this extension you will reduce loading times, improve download performance, and strengthen security.
 
@@ -22,8 +22,6 @@ where you did cloned this repository. (_You can ignore the warning about `Unreco
 You're done! Click the toolbar button to go to our website (i.e. extension)
 
 _The same instructions does apply to other Chromium-based browsers, such as Opera or the new Edge_
-
-Under Firefox, go to `about:debugging#/runtime/this-firefox`, next click on `Load temporary Add-On` and select the manifest.json file.
 
 #### Updating
 

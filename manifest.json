@@ -48,12 +48,5 @@
       "64": "images/icon-64.png"
     },
     "default_title": "MEGA"
-  },
-  "applications": {
-    "gecko": {
-      "id": "firefox@mega.co.nz",
-      "strict_min_version": "52.0",
-      "update_url": "https://mega.nz/firefox-web-extension-updates.json"
-    }
   }
 }
