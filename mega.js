@@ -52,13 +52,13 @@
                 hash = '#' + getPathHash(url, path);
             }
             else if (url.indexOf('#') > -1) {
-                const nlfe = url.match(/\/\/mega\.nz\/+(embed|drop)[!#/]+([\w-]{8,11})(?:[#!](.*))?/i);
+                const nlfe = url.match(/\/\/mega\.nz\/+(embed|drop|filerequest)[!#/]+([\w-]{8,11})(?:[#!](.*))?/i);
 
                 if (nlfe) {
                     let type = nlfe[1];
                     let node = nlfe[2];
                     let pkey = nlfe[3];
-                    let lpfx = ({embed: 'E', drop: 'D'})[type] || '';
+                    let lpfx = ({embed: 'E', drop: 'D', filerequest: 'D'})[type] || '';
 
                     hash = '#' + lpfx + '!' + node + (pkey ? '!' + pkey : '');
                 }
