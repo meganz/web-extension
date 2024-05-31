@@ -12,8 +12,7 @@
     "webRequest",
     "clipboardWrite",
     "unlimitedStorage",
-    "declarativeNetRequest",
-    "declarativeNetRequestFeedback"
+    "declarativeNetRequest"
   ],
   "host_permissions": [
     "https://mega.nz/*"

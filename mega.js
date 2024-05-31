@@ -69,6 +69,7 @@
         });
     }
 
+    /**
     if (!production) {
         const extURL = chrome.runtime.getURL('/');
 
@@ -76,6 +77,7 @@
             console.log(' --- matched rule', p);
         });
     }
+    /**/
 
     ((factory) => {
         chrome.runtime.onStartup.addListener(factory);
