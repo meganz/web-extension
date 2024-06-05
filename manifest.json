@@ -9,8 +9,6 @@
   "incognito": "split",
   "default_locale": "en",
   "permissions": [
-    "webRequest",
-    "clipboardWrite",
     "unlimitedStorage",
     "declarativeNetRequest"
   ],
