@@ -4,7 +4,7 @@
   "description": "__MSG_extDesc__",
   "version": "109101.103.97",
   "content_security_policy": {
-    "extension_pages": "default-src 'self' blob: https://*.mega.co.nz https://*.mega.nz https://*.megapay.nz; script-src 'self'; style-src 'self' 'unsafe-inline' data: blob:; img-src 'self' data: blob: https://*.mega.co.nz https://*.mega.nz; connect-src 'self' wss://*.karere.mega.nz wss://*.sfu.mega.co.nz https://*.mega.co.nz https://*.mega.nz https://*.s4.mega.io http://*.userstorage.mega.co.nz http://*.userstorage.mega.co.nz:8080 http://127.0.0.1:6341; object-src 'none'"
+    "extension_pages": "default-src 'self' blob: https://*.mega.co.nz https://*.mega.nz https://*.megapay.nz; script-src 'self'; style-src 'self' 'unsafe-inline' data: blob:; img-src 'self' data: blob: https://*.mega.co.nz https://*.mega.nz; connect-src 'self' wss://*.karere.mega.nz wss://*.sfu.mega.co.nz https://*.mega.co.nz https://*.mega.nz https://*.s4.mega.io http://*.userstorage.mega.co.nz http://*.userstorage.mega.co.nz:8080 http://127.0.0.1:6341 https://help.mega.io; object-src 'none'"
   },
   "incognito": "split",
   "default_locale": "en",
