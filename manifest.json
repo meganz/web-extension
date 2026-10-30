@@ -13,6 +13,7 @@
     "declarativeNetRequest"
   ],
   "host_permissions": [
+    "https://mega.io/*",
     "https://mega.nz/*"
   ],
   "web_accessible_resources": [
