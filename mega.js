@@ -69,6 +69,25 @@
         });
     }
 
+    manifest.host_permissions
+        .map((p) => p.split('/')[2])
+        .filter((h) => h !== 'mega.app' && h !== 'mega.nz')
+        .forEach((host, idx) => {
+            rules.push({
+                action: {
+                    type: "allow"
+                },
+                condition: {
+                    urlFilter: `||${host}`,
+                    resourceTypes: [
+                        "sub_frame",
+                        "main_frame"
+                    ]
+                },
+                priority: 127 + idx
+            });
+        });
+
     /**
     if (!production) {
         const extURL = chrome.runtime.getURL('/');
